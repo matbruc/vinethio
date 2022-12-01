@@ -6,13 +6,22 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vinethio/build": "file:./build",
+    "openzeppelin-contracts": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "semantic-ui-react": "^2.1.3",
+    "truffle": "^5.6.5",
+    "web-vitals": "^2.1.4",
+    "web3": "^1.8.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "truffle:migrate": "truffle migrate --reset",
+    "populate": "node contract_interact.js",
+    "fullstart": "npm run truffle:migrate && npm run populate && npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

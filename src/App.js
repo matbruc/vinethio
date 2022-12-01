@@ -1,24 +1,89 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
+
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { Container, Menu, Segment, Image } from 'semantic-ui-react';
+import { createContract } from './ethereum/WineSupplyChainContract';
+import web3 from './ethereum/web3';
+import Home from './components/Home';
+import Farms from './components/Farms';
+import Grapes from './components/Grapes';
+import Wines from './components/Wines';
 
 function App() {
+
+  const [contract, setContract] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+
+  useEffect(() => {
+    let contract;
+    let accounts;
+    const getContract = async () => {
+      contract = await createContract();
+      setContract(contract);
+    }
+  
+    const getAccounts = async() =>  {
+      accounts = await web3.eth.getAccounts();
+      setAccounts(accounts);
+    } 
+    
+    try {
+      getContract();
+      getAccounts();
+    } catch (e) {
+      console.log(e);
+    }
+    
+    
+  }, [])
+  
+  const styleLink = document.createElement("link");
+  styleLink.rel = "stylesheet";
+  styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+  document.head.appendChild(styleLink);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    {contract && accounts && accounts.length > 0 ? 
+    (<Segment>
+        <Container>
+          <Menu secondary>
+            <Menu.Item
+              name='Home'
+              href='/'
+            />
+            <Menu.Item
+              name='Fincas'
+              href='/farms'
+            />
+            <Menu.Item
+              name='Uvas'
+              href='/grapes'
+            />
+            <Menu.Item
+              name='Vinos'
+              href='/wines'
+            />
+          </Menu>
+        </Container>
+
+        <div className="container mt-3">
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/farms" element={<Farms contract={contract} accounts={accounts}/>} />
+            <Route path="/grapes" element={<Grapes contract={contract} accounts={accounts}/>} />
+            <Route path="/wines" element={<Wines contract={contract} accounts={accounts}/>} />
+          </Routes>
+        </div>
+      </Segment>)
+    : 
+    (<Segment loading>
+      <Image src='/images/wireframe/paragraph.png' />
+    </Segment>)
+    }
     </div>
+    
   );
 }
 
