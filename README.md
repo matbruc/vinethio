@@ -9,3 +9,4 @@ This POC is for testing purposes and it's meant to run on local Ganache blockcha
 2. Configure truffle-config.js when your local network parameters
 3. Run local ethereum network
 4. Run `npm start` to compile and deploy Smart Contracts in Ganache and then it will launch the web app.
+
