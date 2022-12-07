@@ -6,9 +6,12 @@ import { Container, Menu, Segment, Image } from 'semantic-ui-react';
 import { createContract } from './ethereum/WineSupplyChainContract';
 import web3 from './ethereum/web3';
 import Home from './components/Home';
-import Farms from './components/Farms';
-import Grapes from './components/Grapes';
-import Wines from './components/Wines';
+import Farms from './components/Farms/Farms';
+import FarmsForm from "./components/Farms/FarmsForm";
+import Grapes from './components/Grapes/Grapes';
+import GrapesForm from "./components/Grapes/GrapesForm";
+import Wines from './components/Wines/Wines';
+import WinesForm from "./components/Wines/WinesForm";
 
 function App() {
 
@@ -72,8 +75,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/farms" element={<Farms contract={contract} accounts={accounts}/>} />
+            <Route path="/farms/create" element={<FarmsForm contract={contract} accounts={accounts}/>} />
             <Route path="/grapes" element={<Grapes contract={contract} accounts={accounts}/>} />
+            <Route path="/grapes/create" element={<GrapesForm contract={contract} accounts={accounts}/>} />
             <Route path="/wines" element={<Wines contract={contract} accounts={accounts}/>} />
+            <Route path="/wines/create" element={<WinesForm contract={contract} accounts={accounts}/>} />
           </Routes>
         </div>
       </Segment>)

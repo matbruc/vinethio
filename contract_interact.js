@@ -43,16 +43,6 @@ web3.setProvider(
         await firstRetailerWine();
         await secondRetailerWine();
         await consumeWine();
-
-        // let fincas = await WineSupplyChain.methods.getAllFincas().call({ from: producerAddress });
-        // console.log(fincas);
-
-    //    let events = await WineSupplyChain.getPastEvents("allEvents", {
-    //     fromBlock: '0x0',
-    //     toBlock: 'latest'
-    //    });
-    //    console.log(events);
-        
     }
 
     async function registerFarms() {

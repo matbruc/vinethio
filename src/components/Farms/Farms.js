@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Loader, Table } from "semantic-ui-react";
+import { Button, Loader, Table } from "semantic-ui-react";
 
 const Farms = props => {
     const [farms, setFarms] = useState(null);
@@ -18,6 +18,9 @@ const Farms = props => {
         <div>
             {farms ? 
             (<div>
+                <Button basic color='purple' href={'farms/create'}>
+                    Registrar Finca
+                </Button>
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
